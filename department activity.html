@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beauness</title>
+  <style>
+    /* Global Styles */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    body { color: #333; background-color: #ffe6f0; }
+
+    header {
+      position: fixed; top: 0; width: 100%; padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    .logo { font-size: 2rem; font-weight: 600; color: #8b004b; }
+    .hamburger { width: 30px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; height: 22px; }
+    .hamburger div { height: 4px; background: #8b004b; border-radius: 2px; }
+
+    nav {
+      position: fixed; top: 0; right: -300px; height: 100%; width: 280px;
+      background: #8b004b; color: white; padding: 60px 20px; transition: right 0.3s;
+    }
+    nav.open { right: 0; }
+    nav ul { list-style: none; }
+    nav li { margin: 20px 0; font-size: 1.1rem; }
+    nav li span.subtitle { display: block; font-size: 0.9rem; color: #ffd1e6; margin-top: 4px; }
+
+    /* Hero */
+    .hero {
+      height: 100vh; background: 
+        url('https://images.unsplash.com/photo-1556228724-4a5d3b0ade89?auto=format&fit=crop&w=1740&q=80') 
+        center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 0 20px;
+    }
+    .hero .hero-content {
+      background: rgba(255,255,255,0.6); padding: 40px; border-radius: 12px;
+    }
+    .hero h1 { font-size: 3.5rem; color: #8b004b; margin-bottom: 10px; }
+    .hero p { font-size: 1.2rem; color: #5a0030; }
+
+    section { padding: 80px 20px; max-width: 1000px; margin: auto; }
+    h2 { font-size: 2rem; text-align: center; color: #8b004b; margin-bottom: 20px; }
+
+    /* Appointment Form */
+    form { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 20px; }
+    .form-group label { margin-bottom: 6px; color: #555; }
+    .form-group select,
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="date"],
+    .form-group input[type="time"] {
+      padding: 10px; border: 1px solid #ccc; border-radius: 4px;
+      font-size: 1rem;
+    }
+    .form-group input[type="submit"] {
+      background: #8b004b; color: white;
+      padding: 12px; font-size: 1rem;
+      border: none; border-radius: 4px;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .form-group input[type="submit"]:hover {
+      background: #a01461;
+    }
+
+    /* Services & Contact */
+    .services ul { list-style: none; }
+    .services li { 
+      background: #ffd1e6; margin: 10px 0; padding: 15px; border-radius: 6px;
+      font-size: 1.1rem;
+    }
+    .contact p { margin: 8px 0; font-size: 1.05rem; }
+
+    /* Footer */
+    footer {
+      background: #8b004b; color: white; text-align: center; padding: 20px;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1rem; }
+    }
+    /* --- Gallery Animations & Transitions --- */
+.gallery {
+  text-align: center;
+  padding: 60px 20px;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.image-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUp 1.2s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.image-grid img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0;
+  animation: zoomFade 1s ease forwards;
+  animation-delay: 0.6s;
+}
+.image-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Beauness</div>
+    <div class="hamburger" onclick="toggleNav()">
+      <div></div><div></div><div></div><div></div>
+    </div>
+  </header>
+
+  <nav id="navPanel">
+    <ul>
+      <li>About Us
+        <span class="subtitle">Who We Are<br>
+          Beauness is more than just a beauty parlour...luxurious environment.
+        </span>
+      </li>
+      <li>Services
+        <span class="subtitle">Facials & Skincare, Haircuts, Styling & Coloring, Manicure & Pedicure, Bridal Makeup & Event, Body Spa & Relaxation, Dermatology & Skin Treatments.</span>
+      </li>
+      <li>Book Appointment
+        <span class="subtitle">Schedule your visit in minutes — or call +91-9876543210 for urgent bookings.</span>
+      </li>
+      <li>Contact Us
+        <span class="subtitle">No. 123, Velvet Street, Chennai 600001 · +91‑9876543210 · contact@beauness.com</span>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Beauness</h1>
+      <p>Skin Care • Hair Treatment • Hair Care • Beauty Service • Nail Arts</p>
+    </div>
+  </div>
+
+  <section id="appointment">
+    <h2>Book Appointment</h2>
+    <form id="apptForm" onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label for="category">Select Category:</label>
+        <select id="category" required>
+          <option value="">--Choose--</option>
+          <option>Beauty & Facial Service</option>
+          <option>Bridal Service</option>
+          <option>Hair Care & Treatment</option>
+          <option>Laser Hair Reduction</option>
+          <option>Skin & Dermat</option>
+          <option>Weight Loss & Body Shaping</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Select Service Date & Time:</label>
+        <input type="date" id="sdate" required min="" />
+        <input type="time" id="stime" required min="09:00" max="21:00" />
+      </div>
+      <div class="form-group">
+        <label>Select Your City:</label>
+        <select id="city" required>
+          <option value="">--Choose--</option>
+          <option>Bangalore</option>
+          <option>Chennai</option>
+          <option>Hyderabad</option>
+          <option>Kerala</option>
+          <option>Tiruppur</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Select Center:</label>
+        <select id="center" required>
+          <option value="">--Choose--</option>
+          <option>Chennai – Adyar</option>
+          <option>Bangalore – Whitefield</option>
+          <option>Hyderabad – Kokapet</option>
+          <option>Kerala – Trivandrum</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Name:</label><input type="text" id="name" required/>
+      </div>
+      <div class="form-group">
+        <label>Your Email:</label><input type="email" id="email" required/>
+      </div>
+      <div class="form-group">
+        <label>Your Phone:</label><input type="tel" id="phone" required/>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Submit Appointment">
+      </div>
+    </form>
+  </section>
+
+  <section class="services">
+    <h2>What We Offer</h2>
+    <ul>
+      <li>Facials & Skincare</li>
+      <li>Haircuts, Styling & Coloring</li>
+      <li>Manicure & Pedicure</li>
+      <li>Bridal Makeup & Special Event Styling</li>
+      <li>Body Spa & Relaxation</li>
+      <li>Dermatology & Skin Treatments</li>
+    </ul>
+  </section>
+<section class="gallery">
+  <h2>Our Looks</h2>
+  <div class="image-grid">
+    <img src="https://i.postimg.cc/jST76Lxn/image04.jpg" alt="Beauty Model 1">
+    <img src="https://i.postimg.cc/BQT8v4TS/image05.jpg" alt="Beauty Model 2">
+    <img src="https://i.postimg.cc/Lsb5WXpT/image06.jpg" alt="Beauty Model 3">
+  </div>
+</section>
+<section class="gallery">
+  <h2>Our Looks</h2>
+  <div class="image-grid">
+    <img src="https://i.postimg.cc/Nf3ysL9P/image01.jpg"alt="Beauty Model 1">
+    <img src="https://i.postimg.cc/Rh3F9zMB/image02.jpg" alt="Beauty Model 2">
+    <img src="https://i.postimg.cc/9MkmLNyN/image03.jpg" alt="Beauty Model 3">
+  </div>
+</section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>We'd Love to Hear From You!</p>
+    <p><strong>Address:</strong> No. 123, Velvet Street, Chennai 600001</p>
+    <p><strong>Phone:</strong> +91‑9876543210</p>
+    <p><strong>Email:</strong> contact@beauness.com</p>
+    <p><strong>Working Hours:</strong> 9 AM – 8 PM (All Days)</p>
+    <p>Follow us on <a href="#" style="color:#8b004b;">Instagram</a> & <a href="#" style="color:#8b004b;">Facebook</a> for updates and offers!</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Beauness. All rights reserved.
+  </footer>
+
+  <script>
+    // Hamburger Menu Toggle
+    function toggleNav() {
+      document.getElementById('navPanel').classList.toggle('open');
+    }
+
+    // Set min selectable date to today
+    const dateInput = document.getElementById('sdate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    // Form handling
+    function submitForm(e) {
+      e.preventDefault();
+      // You can hook this into your backend here
+      alert('Thank you, ' + document.getElementById('name').value + '! Your appointment request has been received.');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
